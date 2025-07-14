@@ -1,0 +1,47 @@
+version: '3.9'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ai_tools_prod}
+      POSTGRES_USER: ${POSTGRES_USER:-ai_tools_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-your_secure_password}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ai_tools_user} -d ${POSTGRES_DB:-ai_tools_prod}"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - ai_tools_network
+
+  # Scheduler для автоматического парсинга (опционально)
+  scheduler:
+    build: .
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-ai_tools_user}:${POSTGRES_PASSWORD:-your_secure_password}@db:5432/${POSTGRES_DB:-ai_tools_prod}
+      NODE_ENV: production
+      LOG_LEVEL: info
+    volumes:
+      - ./logs:/app/logs
+    command: ["node", "dist/scheduler.js"]  # Будущий планировщик
+    networks:
+      - ai_tools_network
+
+volumes:
+  postgres_data:
+
+networks:
+  ai_tools_network:
+    driver: bridge 

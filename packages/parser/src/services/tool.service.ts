@@ -28,7 +28,7 @@ export class ToolService {
           update: {
             name: tool.name,
             description: tool.description,
-            tags: JSON.stringify(tool.tags), // Преобразуем массив в JSON строку
+            tags: tool.tags,
             category: tool.category,
             pricing: tool.pricing,
           },
@@ -36,7 +36,7 @@ export class ToolService {
             name: tool.name,
             description: tool.description,
             url: tool.url,
-            tags: JSON.stringify(tool.tags), // Преобразуем массив в JSON строку
+            tags: tool.tags,
             category: tool.category,
             pricing: tool.pricing,
           },
@@ -82,14 +82,8 @@ export class ToolService {
         },
       });
 
-      // Преобразуем JSON строки обратно в массивы
-      const toolsWithParsedTags = tools.map(tool => ({
-        ...tool,
-        tags: JSON.parse(tool.tags) as string[],
-      }));
-
       logger.info(`Получено ${tools.length} инструментов из базы данных`);
-      return toolsWithParsedTags;
+      return tools;
     } catch (error) {
       logger.error('Ошибка при получении инструментов из БД:', error);
       throw error;
