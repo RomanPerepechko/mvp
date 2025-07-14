@@ -1,21 +1,40 @@
 # 🧠 AI Tools Aggregator
 
-Монорепозиторий для агрегатора AI-инструментов с CLI-парсером и базой данных.
+Монорепозиторий для агрегатора AI-инструментов с CLI-парсером, REST API и базой данных PostgreSQL.
 
 ## 🏗️ Архитектура
 
 ```
 ai-tools-aggregator/
 ├─ apps/
-│  └─ api/                 # Backend API (будущая разработка)
+│  └─ api/                 # REST API (Fastify + TypeScript)
 ├─ packages/
 │  ├─ shared/              # Общие типы и утилиты
 │  └─ parser/              # CLI-парсер с Playwright
 ├─ docker/
 │  └─ db/                  # Инициализация PostgreSQL
-├─ docker-compose.yml      # Конфигурация баз данных
+├─ docker-compose.prod.yml # Production конфигурация
+├─ deploy.sh               # Автоматический деплой
 └─ README.md
 ```
+
+## 🌐 Production API
+
+**🚀 API уже развернуто и работает!**
+
+### Эндпоинты:
+
+| Method | URL | Описание |
+|--------|-----|----------|
+| `GET` | `http://146.103.99.64:3001/health` | Health check |
+| `GET` | `http://146.103.99.64:3001/api/tools` | Все AI-инструменты |
+| `GET` | `http://146.103.99.64:3001/api/tools/demo` | Демо данные |
+| `GET` | `http://146.103.99.64:3001/api/categories` | Категории |
+
+### Данные в БД:
+- **5 AI-инструментов**: ChatGPT, Midjourney, Notion AI, Copy.ai, Synthesia
+- **4 категории**: Writing, Image, Productivity, Video
+- **Типы цен**: Free, Paid, Freemium
 
 ## 🚀 Быстрый старт
 
@@ -45,9 +64,21 @@ pnpm db:generate
 pnpm db:push
 ```
 
-### 3. Запуск парсера
+### 3. Запуск API (локально)
 
 ```bash
+# Запуск API в dev режиме
+pnpm --filter api run dev
+
+# API будет доступно на http://localhost:3001
+```
+
+### 4. Запуск парсера
+
+```bash
+# Демо данные (5 тестовых инструментов)
+pnpm parser demo
+
 # Парсинг FutureTools (сохранение в БД)
 pnpm parser crawl futuretools
 
@@ -66,10 +97,50 @@ pnpm parser crawl futuretools --log-level debug
 Создайте файл `.env` в корне проекта:
 
 ```env
+# Database
 DATABASE_URL=postgresql://user:pass@localhost:5432/ai_tools
 POSTGRES_DB=ai_tools
 POSTGRES_USER=user
 POSTGRES_PASSWORD=pass
+
+# API
+API_PORT=3001
+API_HOST=0.0.0.0
+CORS_ORIGIN=http://localhost:3000
+
+# Application
+NODE_ENV=development
+LOG_LEVEL=info
+```
+
+## 🌍 Production Deployment
+
+### Автоматический деплой:
+
+```bash
+# Настройка переменных
+export SERVER_HOST=146.103.99.64
+export SERVER_USER=root
+
+# Запуск деплоя
+./deploy.sh
+```
+
+### Управление на сервере:
+
+```bash
+# Подключение к серверу
+ssh root@146.103.99.64
+cd /opt/ai-tools-aggregator
+
+# Статус API
+curl localhost:3001/health
+
+# Логи API
+docker-compose -f docker-compose.prod.yml logs api
+
+# Перезапуск сервисов
+docker-compose -f docker-compose.prod.yml restart
 ```
 
 ## 🧰 CLI Команды
@@ -114,28 +185,51 @@ pnpm parser clear --yes
 
 ## 🔧 Разработка
 
-### Структура парсера
+### Структура проекта
 
 ```
-packages/parser/
+apps/api/                 # REST API
 ├─ src/
-│  ├─ configs/           # Конфигурации для каждого источника
-│  ├─ crawlers/          # Классы парсеров
-│  ├─ commands/          # CLI команды
-│  ├─ services/          # Сервисы для работы с БД
+│  ├─ routes/            # API роуты
+│  ├─ schemas/           # Zod схемы валидации
 │  ├─ db/               # Prisma клиент
-│  ├─ types/            # TypeScript типы
-│  └─ utils/            # Утилиты (логгер и др.)
-├─ prisma/
-│  └─ schema.prisma     # Схема базы данных
-└─ package.json
+│  ├─ plugins/          # Fastify плагины
+│  └─ utils/            # Утилиты
+├─ prisma/              # Схема БД
+└─ Dockerfile           # Docker конфигурация
+
+packages/parser/          # CLI парсер
+├─ src/
+│  ├─ configs/          # Конфигурации источников
+│  ├─ crawlers/         # Классы парсеров
+│  ├─ commands/         # CLI команды
+│  ├─ services/         # Сервисы БД
+│  └─ utils/           # Утилиты
+└─ prisma/             # Схема БД
+
+packages/shared/          # Общие типы
+└─ src/types/           # TypeScript типы
 ```
 
 ### Добавление нового источника
 
-1. Создайте конфигурацию в `src/configs/newsource.config.ts`
-2. Реализуйте парсер в `src/crawlers/newsource.ts`
-3. Добавьте обработку в `src/commands/crawl.ts`
+1. Создайте конфигурацию в `packages/parser/src/configs/newsource.config.ts`
+2. Реализуйте парсер в `packages/parser/src/crawlers/newsource.ts`
+3. Добавьте обработку в `packages/parser/src/commands/crawl.ts`
+
+### API Development
+
+```bash
+# Запуск API в dev режиме
+pnpm --filter api run dev
+
+# Сборка API
+pnpm --filter api run build
+
+# Тестирование эндпоинтов
+curl http://localhost:3001/api/tools
+curl http://localhost:3001/api/categories
+```
 
 ### Типы данных
 
@@ -155,22 +249,27 @@ interface Tool {
 
 ## 🐳 Docker
 
-### Запуск только базы данных
+### Development
 
 ```bash
+# Запуск только базы данных
 docker-compose up -d db
-```
 
-### Просмотр логов
-
-```bash
+# Просмотр логов
 docker-compose logs -f db
 ```
 
-### Остановка
+### Production
 
 ```bash
-docker-compose down
+# Запуск всех сервисов
+docker-compose -f docker-compose.prod.yml up -d
+
+# Статус
+docker-compose -f docker-compose.prod.yml ps
+
+# Остановка
+docker-compose -f docker-compose.prod.yml down
 ```
 
 ## 📊 Мониторинг
@@ -189,12 +288,8 @@ pnpm db:studio
 # Через psql
 psql postgresql://user:pass@localhost:5432/ai_tools
 
-# Или через любой SQL клиент
-# Host: localhost
-# Port: 5432
-# Database: ai_tools
-# Username: user
-# Password: pass
+# Production БД
+psql postgresql://ai_tools_user:AiTools2025SecurePwd123@146.103.99.64:5432/ai_tools_prod
 ```
 
 ## 📝 Примеры использования
@@ -204,6 +299,19 @@ psql postgresql://user:pass@localhost:5432/ai_tools
 ```bash
 # Парсинг минимум 50 инструментов с FutureTools
 pnpm parser crawl futuretools
+```
+
+### Работа с API
+
+```bash
+# Получить все инструменты
+curl http://146.103.99.64:3001/api/tools
+
+# Получить категории
+curl http://146.103.99.64:3001/api/categories
+
+# Health check
+curl http://146.103.99.64:3001/health
 ```
 
 ### Тестирование перед сохранением
@@ -245,6 +353,19 @@ docker-compose restart db
 docker-compose logs db
 ```
 
+### API не отвечает
+
+```bash
+# Проверьте статус API
+curl http://localhost:3001/health
+
+# Логи API
+docker-compose -f docker-compose.prod.yml logs api
+
+# Перезапуск API
+docker-compose -f docker-compose.prod.yml restart api
+```
+
 ### Ошибки парсинга
 
 ```bash
@@ -262,19 +383,34 @@ pnpm parser crawl futuretools --dry-run
 npx playwright install chromium
 ```
 
-## 📈 Расширение
+## 📈 Roadmap
 
-### Планируемые функции
+### ✅ Готово
 
+- [x] CLI-парсер с Playwright
+- [x] PostgreSQL база данных
+- [x] REST API (Fastify + TypeScript)
+- [x] Production deployment
+- [x] Docker конфигурация
+- [x] Автоматический деплой
+
+### 🔄 В разработке
+
+- [ ] Swagger документация API
 - [ ] Веб-интерфейс (Nuxt 3)
-- [ ] REST API (Fastify)
 - [ ] Дополнительные источники парсинга
 - [ ] Система уведомлений о новых инструментах
 - [ ] Автоматический парсинг по расписанию
+- [ ] Авторизация и пользователи
 
 ### Архитектура для масштабирования
 
-Проект готов к расширению в полноценный веб-сервис с API и фронтендом благодаря модульной структуре monorepo.
+Проект готов к расширению в полноценный веб-сервис благодаря модульной структуре monorepo:
+
+- **Backend**: REST API готов для фронтенда
+- **База данных**: PostgreSQL с готовой схемой
+- **Парсер**: Модульная система для добавления источников
+- **Deployment**: Автоматизированный процесс
 
 ## 📄 Лицензия
 

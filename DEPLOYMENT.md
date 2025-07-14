@@ -1,6 +1,6 @@
 # 🚀 Развертывание AI Tools Aggregator
 
-Подробные инструкции по развертыванию CLI-парсера на продакшн сервере.
+Подробные инструкции по развертыванию CLI-парсера и REST API на продакшн сервере.
 
 ## 📋 Требования к серверу
 
@@ -17,22 +17,34 @@
 - Git
 - SSH доступ
 
+### Открытые порты:
+- **22**: SSH
+- **3001**: REST API
+- **5432**: PostgreSQL (только локально)
+
 ## 🎯 Способы развертывания
 
 ### Способ 1: Автоматический деплой (рекомендуется)
 
 ```bash
 # 1. Клонирование репозитория
-git clone https://github.com/your-username/ai-tools-aggregator.git
-cd ai-tools-aggregator
+git clone https://github.com/RomanPerepechko/mvp.git
+cd mvp
 
 # 2. Настройка переменных
-export SERVER_HOST=your-server.com  # IP или домен вашего сервера
-export SERVER_USER=ubuntu           # Пользователь для SSH
+export SERVER_HOST=146.103.99.64    # IP вашего сервера
+export SERVER_USER=root             # Пользователь для SSH
 
 # 3. Запуск автоматического деплоя
 ./deploy.sh
 ```
+
+**Результат автоматического деплоя:**
+- ✅ Установка зависимостей
+- ✅ Сборка CLI парсера и API
+- ✅ Запуск PostgreSQL в Docker
+- ✅ Генерация Prisma клиентов
+- ✅ Создание таблиц БД
 
 ### Способ 2: Ручное развертывание
 
@@ -40,23 +52,23 @@ export SERVER_USER=ubuntu           # Пользователь для SSH
 
 ```bash
 # Подключение к серверу
-ssh ubuntu@your-server.com
+ssh root@146.103.99.64
 
 # Обновление системы
-sudo apt update && sudo apt upgrade -y
+apt update && apt upgrade -y
 
 # Установка Docker
 curl -fsSL https://get.docker.com -o get-docker.sh
-sudo sh get-docker.sh
-sudo usermod -aG docker $USER
+sh get-docker.sh
+usermod -aG docker $USER
 
 # Установка Docker Compose
-sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+curl -L "https://github.com/docker/compose/releases/download/v2.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 
 # Установка Node.js 18
-curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-sudo apt-get install -y nodejs
+curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+apt-get install -y nodejs
 
 # Установка pnpm
 npm install -g pnpm
@@ -66,29 +78,34 @@ npm install -g pnpm
 
 ```bash
 # Создание директории проекта
-sudo mkdir -p /opt/ai-tools-aggregator
-sudo chown $USER:$USER /opt/ai-tools-aggregator
+mkdir -p /opt/ai-tools-aggregator
+cd /opt
 
 # Клонирование
-cd /opt
-git clone https://github.com/your-username/ai-tools-aggregator.git
+git clone https://github.com/RomanPerepechko/mvp.git ai-tools-aggregator
 cd ai-tools-aggregator
 ```
 
 #### Шаг 3: Настройка окружения
 
 ```bash
-# Копирование и настройка конфигурации
-cp env.production.example .env
+# Создание .env файла
+cat > .env <<EOF
+# Database
+DATABASE_URL="postgresql://ai_tools_user:AiTools2025SecurePwd123@localhost:5432/ai_tools_prod"
+POSTGRES_DB=ai_tools_prod
+POSTGRES_USER=ai_tools_user
+POSTGRES_PASSWORD=AiTools2025SecurePwd123
 
-# Редактирование .env файла
-nano .env
-```
+# Application
+NODE_ENV=production
+LOG_LEVEL=info
 
-Измените в `.env` файле:
-```env
-DATABASE_URL="postgresql://ai_tools_user:YOUR_SECURE_PASSWORD@localhost:5432/ai_tools_prod"
-POSTGRES_PASSWORD=YOUR_SECURE_PASSWORD
+# API
+API_PORT=3001
+API_HOST=0.0.0.0
+CORS_ORIGIN=http://localhost:3000
+EOF
 ```
 
 #### Шаг 4: Установка зависимостей
@@ -100,12 +117,14 @@ pnpm install --frozen-lockfile
 # Сборка проекта
 pnpm --filter shared run build
 pnpm --filter parser run build
+pnpm --filter api run build
 
-# Генерация Prisma клиента
+# Генерация Prisma клиентов
 pnpm db:generate
+cd apps/api && npx prisma generate && cd ../..
 ```
 
-#### Шаг 5: Запуск базы данных
+#### Шаг 5: Запуск сервисов
 
 ```bash
 # Запуск PostgreSQL
@@ -116,24 +135,74 @@ sleep 30
 
 # Создание таблиц
 pnpm db:push
+
+# Запуск API (вариант 1: через Docker)
+docker-compose -f docker-compose.prod.yml up -d api
+
+# Запуск API (вариант 2: напрямую)
+cd apps/api
+DATABASE_URL="postgresql://ai_tools_user:AiTools2025SecurePwd123@localhost:5432/ai_tools_prod" \
+API_PORT=3001 \
+CORS_ORIGIN="http://localhost:3000" \
+LOG_LEVEL=info \
+node dist/index.js &
 ```
 
 #### Шаг 6: Тестирование
 
 ```bash
-# Тест с демо-данными
+# Тест CLI парсера с демо-данными
 pnpm parser demo
 
 # Проверка статистики
 pnpm parser stats
 
-# Тест парсинга (если нужно)
-pnpm parser crawl futuretools --limit 10
+# Тест API эндпоинтов
+curl http://localhost:3001/health
+curl http://localhost:3001/api/tools
+curl http://localhost:3001/api/categories
+
+# Публичное тестирование API
+curl http://146.103.99.64:3001/health
+```
+
+## 🌐 Production API
+
+### Эндпоинты в продакшене:
+
+| Method | URL | Описание |
+|--------|-----|----------|
+| `GET` | `http://146.103.99.64:3001/health` | Health check |
+| `GET` | `http://146.103.99.64:3001/api/tools` | Все AI-инструменты |
+| `GET` | `http://146.103.99.64:3001/api/tools/demo` | Демо данные |
+| `GET` | `http://146.103.99.64:3001/api/categories` | Категории |
+
+### Управление API:
+
+```bash
+# Проверка статуса API
+curl http://localhost:3001/health
+
+# Логи API
+docker-compose -f docker-compose.prod.yml logs api
+
+# Перезапуск API
+docker-compose -f docker-compose.prod.yml restart api
+
+# Остановка API
+pkill -f "node dist/index.js"
+
+# Запуск API
+cd /opt/ai-tools-aggregator/apps/api
+DATABASE_URL="postgresql://ai_tools_user:AiTools2025SecurePwd123@localhost:5432/ai_tools_prod" \
+API_PORT=3001 node dist/index.js &
 ```
 
 ## 🔧 Настройка автоматизации
 
-### Создание systemd сервиса
+### Создание systemd сервисов
+
+#### Сервис для CLI парсера:
 
 ```bash
 # Создание сервиса для регулярного парсинга
@@ -144,10 +213,38 @@ After=network.target
 
 [Service]
 Type=oneshot
-User=ubuntu
+User=root
 WorkingDirectory=/opt/ai-tools-aggregator
 ExecStart=/usr/bin/pnpm parser crawl futuretools
 Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+#### Сервис для API:
+
+```bash
+# Создание сервиса для API
+sudo tee /etc/systemd/system/ai-tools-api.service > /dev/null <<EOF
+[Unit]
+Description=AI Tools REST API
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/ai-tools-aggregator/apps/api
+ExecStart=/usr/bin/node dist/index.js
+Environment=NODE_ENV=production
+Environment=DATABASE_URL=postgresql://ai_tools_user:AiTools2025SecurePwd123@localhost:5432/ai_tools_prod
+Environment=API_PORT=3001
+Environment=API_HOST=0.0.0.0
+Environment=CORS_ORIGIN=http://localhost:3000
+Environment=LOG_LEVEL=info
+Restart=always
+RestartSec=10
 
 [Install]
 WantedBy=multi-user.target
@@ -156,6 +253,10 @@ EOF
 # Перезагрузка systemd
 sudo systemctl daemon-reload
 sudo systemctl enable ai-tools-parser.service
+sudo systemctl enable ai-tools-api.service
+
+# Запуск API сервиса
+sudo systemctl start ai-tools-api.service
 ```
 
 ### Настройка cron для автоматического парсинга
@@ -172,11 +273,16 @@ crontab -e
 
 ```bash
 # Создание директории для логов
-sudo mkdir -p /var/log/ai-tools
-sudo chown $USER:$USER /var/log/ai-tools
+mkdir -p /var/log/ai-tools
 
-# Просмотр логов в реальном времени
+# Просмотр логов парсера
 tail -f /var/log/ai-tools.log
+
+# Просмотр логов API
+journalctl -fu ai-tools-api.service
+
+# Логи Docker контейнеров
+docker-compose -f docker-compose.prod.yml logs -f
 ```
 
 ## 🔒 Безопасность
@@ -185,9 +291,12 @@ tail -f /var/log/ai-tools.log
 
 ```bash
 # Установка и настройка UFW
-sudo ufw allow ssh
-sudo ufw allow 5432/tcp  # PostgreSQL (только если нужен внешний доступ)
-sudo ufw --force enable
+ufw allow ssh
+ufw allow 3001/tcp   # REST API
+ufw --force enable
+
+# Проверка статуса
+ufw status
 ```
 
 ### Backup базы данных
@@ -224,10 +333,15 @@ echo "0 2 * * * /opt/ai-tools-aggregator/backup.sh" | crontab -
 docker-compose -f docker-compose.prod.yml ps
 
 # Статус системных сервисов
-sudo systemctl status ai-tools-parser.service
+systemctl status ai-tools-parser.service
+systemctl status ai-tools-api.service
 
 # Просмотр статистики БД
 pnpm parser stats
+
+# Тест API
+curl http://localhost:3001/health
+curl http://localhost:3001/api/tools | jq '.total'
 
 # Проверка логов
 docker-compose -f docker-compose.prod.yml logs -f
@@ -244,8 +358,14 @@ git pull origin main
 # Переустановка зависимостей
 pnpm install
 
+# Сборка обновлений
+pnpm --filter shared run build
+pnpm --filter parser run build
+pnpm --filter api run build
+
 # Перезапуск сервисов
 docker-compose -f docker-compose.prod.yml restart
+systemctl restart ai-tools-api.service
 
 # Обновление БД схемы (если нужно)
 pnpm db:push
@@ -267,6 +387,27 @@ docker-compose -f docker-compose.prod.yml restart db
 docker-compose -f docker-compose.prod.yml logs db
 ```
 
+#### API не отвечает
+```bash
+# Проверка статуса API
+curl http://localhost:3001/health
+
+# Проверка процессов
+ps aux | grep "node dist/index.js"
+
+# Логи API
+journalctl -fu ai-tools-api.service
+
+# Перезапуск API
+systemctl restart ai-tools-api.service
+
+# Или ручной запуск
+pkill -f "node dist/index.js"
+cd /opt/ai-tools-aggregator/apps/api
+DATABASE_URL="postgresql://ai_tools_user:AiTools2025SecurePwd123@localhost:5432/ai_tools_prod" \
+API_PORT=3001 node dist/index.js &
+```
+
 #### Ошибки парсинга
 ```bash
 # Проверка с debug логами
@@ -283,19 +424,29 @@ free -h
 docker stats
 
 # Увеличение swap
-sudo fallocate -l 2G /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
+fallocate -l 2G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+```
+
+#### Проблемы с портами
+```bash
+# Проверка занятых портов
+netstat -tulpn | grep :3001
+lsof -i :3001
+
+# Освобождение порта
+kill -9 $(lsof -t -i:3001)
 ```
 
 ## 📈 Масштабирование
 
 ### Горизонтальное масштабирование
 
-1. **Load Balancer**: Nginx для распределения нагрузки
+1. **Load Balancer**: Nginx для распределения нагрузки на API
 2. **Репликация БД**: Master-Slave PostgreSQL
-3. **Кэширование**: Redis для кэширования результатов
+3. **Кэширование**: Redis для кэширования API ответов
 4. **Мониторинг**: Prometheus + Grafana
 
 ### Вертикальное масштабирование
@@ -310,17 +461,54 @@ services:
         limits:
           memory: 4G
           cpus: '2'
+  api:
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1'
+```
+
+### Nginx как reverse proxy
+
+```bash
+# Установка Nginx
+apt install nginx
+
+# Конфигурация для API
+cat > /etc/nginx/sites-available/ai-tools-api <<EOF
+server {
+    listen 80;
+    server_name your-domain.com;
+
+    location / {
+        proxy_pass http://localhost:3001;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+}
+EOF
+
+# Активация конфигурации
+ln -s /etc/nginx/sites-available/ai-tools-api /etc/nginx/sites-enabled/
+nginx -t
+systemctl reload nginx
 ```
 
 ## 📞 Поддержка
 
 При возникновении проблем:
 
-1. Проверьте логи: `docker-compose -f docker-compose.prod.yml logs`
+1. Проверьте логи: 
+   - `docker-compose -f docker-compose.prod.yml logs`
+   - `journalctl -fu ai-tools-api.service`
 2. Проверьте статус: `pnpm parser stats`
-3. Создайте issue в репозитории
-4. Обратитесь к документации Prisma/Playwright
+3. Тест API: `curl http://localhost:3001/health`
+4. Создайте issue в репозитории: https://github.com/RomanPerepechko/mvp
+5. Обратитесь к документации Prisma/Playwright/Fastify
 
 ---
 
-🎉 **Развертывание завершено!** Ваш AI Tools Aggregator готов к работе на продакшн сервере. 
+🎉 **Развертывание завершено!** Ваш AI Tools Aggregator с REST API готов к работе на продакшн сервере. 
