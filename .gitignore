@@ -5,11 +5,15 @@ node_modules/
 # Build outputs
 dist/
 build/
+apps/api/dist/
+apps/*/dist/
 
 # Environment files
 .env
 .env.local
 .env.production
+.env.staging
+.env.development.local
 
 # Logs
 logs/
@@ -23,6 +27,12 @@ lerna-debug.log*
 # Database
 .prisma/
 packages/parser/src/generated/
+apps/api/src/generated/
+packages/parser/dev.db
+packages/parser/prisma/dev.db
+apps/api/prisma/dev.db
+*.db
+*.sqlite
 
 # IDE
 .vscode/
@@ -36,8 +46,53 @@ Thumbs.db
 
 # Docker
 docker-compose.override.yml
+.docker/
 
 # Playwright
 test-results/
 playwright-report/
-playwright/.cache/ 
+playwright/.cache/
+
+# Production deployment
+backup/
+backups/
+deploy-logs/
+*.pem
+*.key
+DEPLOY_ACCESS.md
+
+# Temporary files
+tmp/
+temp/
+.tmp/
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Microbundle cache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity 
