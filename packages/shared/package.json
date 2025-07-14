@@ -1,0 +1,19 @@
+{
+  "name": "@ai-tools/shared",
+  "version": "1.0.0",
+  "description": "Общие типы и утилиты для AI Tools Aggregator",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./types": "./dist/types/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

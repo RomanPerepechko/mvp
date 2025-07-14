@@ -1,0 +1,25 @@
+{
+  "name": "ai-tools-aggregator",
+  "version": "1.0.0",
+  "description": "AI Tools Aggregator - монорепозиторий для каталога нейросетей",
+  "private": true,
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "parser": "pnpm --filter parser run cli",
+    "db:generate": "pnpm --filter parser run db:generate",
+    "db:push": "pnpm --filter parser run db:push",
+    "db:studio": "pnpm --filter parser run db:studio"
+  },
+  "devDependencies": {
+    "turbo": "^1.10.0",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  }
+} 
