@@ -57,25 +57,59 @@ export async function buildServer() {
     };
   });
 
-  // Реальные данные из БД
+  // Инструменты с фильтрацией
   fastify.get('/api/tools', async (request, reply) => {
     try {
-      const tools = await prisma.tool.findMany({
-        take: 20,
-        orderBy: { createdAt: 'desc' },
-      });
+      const query = request.query as any;
+      
+      // Построение WHERE условий
+      const where: any = {};
+      
+      if (query.search) {
+        where.OR = [
+          { name: { contains: query.search, mode: 'insensitive' } },
+          { description: { contains: query.search, mode: 'insensitive' } },
+        ];
+      }
+      
+      if (query.category) {
+        where.category = query.category;
+      }
+      
+      if (query.pricing) {
+        where.pricing = query.pricing;
+      }
+      
+      if (query.tags) {
+        const tags = Array.isArray(query.tags) ? query.tags : [query.tags];
+        where.tags = {
+          hasSome: tags,
+        };
+      }
 
-      const total = await prisma.tool.count();
+      const limit = parseInt(query.limit) || 20;
+      const offset = parseInt(query.offset) || 0;
+
+      // Параллельные запросы для данных и подсчета
+      const [tools, total] = await Promise.all([
+        prisma.tool.findMany({
+          where,
+          skip: offset,
+          take: limit,
+          orderBy: { createdAt: 'desc' },
+        }),
+        prisma.tool.count({ where }),
+      ]);
 
       return {
-        items: tools.map((tool: any) => ({
+        items: tools.map(tool => ({
           ...tool,
           createdAt: tool.createdAt.toISOString(),
           updatedAt: tool.updatedAt.toISOString(),
         })),
         total,
-        limit: 20,
-        offset: 0,
+        limit,
+        offset,
       };
     } catch (error) {
       fastify.log.error(error);
