@@ -1,0 +1,233 @@
+2025-07-14T19:29:59.312380Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf(".turbo/cookies/.turbo-cookie"), AnchoredSystemPathBuf(".turbo/cookies/1.cookie")}
+2025-07-14T19:29:59.312393Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Root, path: AnchoredSystemPathBuf("") }}))
+2025-07-14T19:30:01.413369Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/nuxt.json")}
+2025-07-14T19:30:01.413379Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:01.613207Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/nuxt.json")}
+2025-07-14T19:30:01.613219Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:02.313108Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/nuxt.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/tsconfig.json")}
+2025-07-14T19:30:02.313119Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:02.413493Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/components.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs"), AnchoredSystemPathBuf("apps/web/.nuxt/imports.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/app.config.mjs"), AnchoredSystemPathBuf("apps/web/.nuxt/vue-router-stub.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/app.config.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/layouts.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/vue-shim.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/middleware.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-nuxt.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/plugins.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/schema.d.ts")}
+2025-07-14T19:30:02.413507Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:03.713581Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/schema/nuxt.schema.json")}
+2025-07-14T19:30:03.713592Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:03.713621Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-07-14T19:30:03.913203Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/schema/nuxt.schema.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/schema/nuxt.schema.json")}
+2025-07-14T19:30:03.913216Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:04.012409Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/manifest/meta/dev.json"), AnchoredSystemPathBuf("apps/web/.nuxt/manifest/latest.json")}
+2025-07-14T19:30:04.012421Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:04.012450Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-07-14T19:30:04.513800Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/tsconfig.server.json"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-imports.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-config.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-routes.d.ts")}
+2025-07-14T19:30:04.513810Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:04.613774Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-imports.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/tsconfig.server.json"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-config.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-routes.d.ts")}
+2025-07-14T19:30:04.613787Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:04.613814Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-07-14T19:30:05.213158Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/dev/index.mjs.map"), AnchoredSystemPathBuf("apps/web/.nuxt/dev/index.mjs")}
+2025-07-14T19:30:05.213168Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:05.223908Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-07-14T19:30:05.413797Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/nitro.json")}
+2025-07-14T19:30:05.413808Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:34.113318Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/nuxt.config.js")}
+2025-07-14T19:30:34.113329Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:35.414381Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/nuxt.config.js")}
+2025-07-14T19:30:35.414391Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:35.433602Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-07-14T19:30:36.913577Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/middleware.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/tsconfig.json"), AnchoredSystemPathBuf("apps/web/.nuxt/nuxt.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/vue-router-stub.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/app.config.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/components.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-nuxt.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/layouts.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/schema.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/app.config.mjs"), AnchoredSystemPathBuf("apps/web/.nuxt/imports.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/vue-shim.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/plugins.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:30:36.913589Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:37.913008Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs"), AnchoredSystemPathBuf("apps/web/.nuxt/schema/nuxt.schema.json")}
+2025-07-14T19:30:37.913019Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:38.014455Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/manifest/latest.json"), AnchoredSystemPathBuf("apps/web/.nuxt/manifest/meta/dev.json"), AnchoredSystemPathBuf("apps/web/.nuxt/schema/nuxt.schema.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/schema/nuxt.schema.json")}
+2025-07-14T19:30:38.014466Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:38.014493Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-07-14T19:30:38.113295Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/manifest/meta/dev.json")}
+2025-07-14T19:30:38.113307Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:38.314977Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:38.314990Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:39.513158Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:39.513187Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:39.614472Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tsconfig.server.json"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-imports.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-config.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/types/nitro-routes.d.ts")}
+2025-07-14T19:30:39.614619Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:40.114576Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:40.114588Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:41.113649Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:41.113660Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:42.114657Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/dev/index.mjs"), AnchoredSystemPathBuf("apps/web/.nuxt/dev/index.mjs.map"), AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:42.114670Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:42.414715Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/nitro.json")}
+2025-07-14T19:30:42.414727Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:43.114302Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:43.114313Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:44.114075Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:44.114087Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:45.113539Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:45.113552Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:46.114782Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:46.114793Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:47.113624Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:47.113634Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:48.113587Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:48.113599Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:49.113467Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:49.113476Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:50.113632Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:50.113643Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:51.114408Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:51.114420Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:52.114300Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:52.114310Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:53.114483Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:53.114495Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:54.114959Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:54.114972Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:55.014334Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:30:55.014346Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:55.214160Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:55.214171Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:56.114742Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:56.114753Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:56.322464Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:30:56.322477Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:57.114270Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:57.114280Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:57.515087Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:30:57.515098Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:58.115068Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:58.115079Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:30:59.114746Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:30:59.114756Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:00.115114Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:00.115124Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:01.214381Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:01.214391Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:02.114254Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:02.114264Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:03.114536Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:03.114549Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:04.114883Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:04.114893Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:05.114366Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:05.114379Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:06.114405Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:06.114415Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:07.115279Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:07.115290Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:08.115308Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:08.115317Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:09.114851Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs"), AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:09.114860Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:10.114508Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:10.114530Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:11.115180Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:11.115190Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:11.213970Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:11.213980Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:12.114600Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:12.114616Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:12.517348Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:12.517361Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:13.114571Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:13.114581Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:13.714743Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:13.714753Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:14.115347Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:14.115357Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:15.014421Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:15.014431Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:16.114267Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:16.114277Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:17.115185Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:17.115195Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:18.115428Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:18.115439Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:18.614865Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:18.614874Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:19.214775Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:19.214785Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:19.815308Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:19.815318Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:20.215312Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:20.215323Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:21.215122Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:21.215132Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:22.115376Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs"), AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:22.115387Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:23.115179Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:23.115188Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:24.115430Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:24.115443Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:25.115709Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:25.115720Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:26.115010Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:26.115020Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:27.214895Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:27.214905Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:27.614609Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:27.614620Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:28.315051Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:28.315062Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:28.615207Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:28.615217Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:29.343494Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:29.343506Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:30.115519Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:30.115532Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:31.214912Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:31.214923Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:31.815607Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:31.815622Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:32.215306Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:32.215317Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:33.214973Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:33.214983Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:34.114988Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs"), AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:34.114998Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:35.115530Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:35.115541Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:35.215747Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:35.215757Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:35.215778Z  WARN turborepo_lib::package_changes_watcher: hashes are the same, no need to rerun
+2025-07-14T19:31:36.115916Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts"), AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:36.115927Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:37.114538Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:37.114548Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:38.015442Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:38.015452Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:38.215009Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:38.215019Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:39.115527Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:39.115539Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:40.215220Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:40.215231Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:40.614478Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:40.614489Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:41.215396Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:41.215409Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:42.115779Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:42.115790Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:43.215579Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:43.215592Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:44.114601Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:44.114612Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:44.715268Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:44.715278Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:45.114854Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:45.114864Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:45.715917Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:45.715928Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:46.015280Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:46.015290Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:47.015909Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:47.015923Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:47.216170Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:47.216180Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:48.115123Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:48.115133Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:49.314265Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:49.314275Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:50.115653Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:50.115663Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:50.216197Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/types/imports.d.ts")}
+2025-07-14T19:31:50.216207Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:51.215585Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:51.215595Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))
+2025-07-14T19:31:52.315548Z  WARN turborepo_lib::package_changes_watcher: changed_files: {AnchoredSystemPathBuf("apps/web/.nuxt/tailwind/postcss.mjs")}
+2025-07-14T19:31:52.315559Z  WARN turborepo_lib::package_changes_watcher: changed_packages: Ok(Some({WorkspacePackage { name: Other("@ai-tools/web"), path: AnchoredSystemPathBuf("apps/web") }}))

@@ -36,6 +36,10 @@ export interface FutureToolsConfig {
     scrollDelay: number;
     /** Максимальное количество попыток загрузки больше инструментов */
     maxLoadMoreAttempts: number;
+    /** Максимальное время скроллинга (мс) */
+    maxScrollTime: number;
+    /** Время ожидания без изменений количества инструментов (мс) */
+    stableCountTimeout: number;
   };
   /** Маппинг ценовых моделей */
   pricingMapping: Record<string, PricingType>;
@@ -46,22 +50,24 @@ export const futuretoolsConfig: FutureToolsConfig = {
   toolsPageUrl: 'https://www.futuretools.io',
   
   selectors: {
-    toolsContainer: '[data-testid="tools-grid"], .tools-grid, .grid-container',
-    toolCard: '[data-testid="tool-card"], .tool-card, .grid-item',
-    toolName: 'h3, .tool-name, [data-testid="tool-name"]',
-    toolDescription: '.tool-description, .description, p',
-    toolUrl: 'a[href]',
-    toolCategory: '.category, .tag-category, [data-category]',
-    toolTags: '.tags, .tag, .chip',
+    toolsContainer: '.collection-list-15.w-dyn-items, .w-dyn-items',
+    toolCard: '.tool.tool-home.w-dyn-item, div[role="listitem"]',
+    toolName: '.tool-item-link---new',
+    toolDescription: '.tool-item-description-box---new',
+    toolUrl: 'a.tool-item-new-window---new',
+    toolCategory: '.text-block-53',
+    toolTags: '.text-block-53',
     toolPricing: '.pricing, .price, .badge',
     loadMoreButton: 'button[data-testid="load-more"], .load-more, button:contains("Load More")',
   },
   
   parsing: {
     minToolsCount: 50,
-    maxToolsCount: 200,
-    scrollDelay: 2000,
-    maxLoadMoreAttempts: 10,
+    maxToolsCount: 4000, // Увеличиваем для всех инструментов
+    scrollDelay: 1500, // Уменьшаем задержку для ускорения
+    maxLoadMoreAttempts: 100, // Больше попыток
+    maxScrollTime: 600000, // 10 минут максимум
+    stableCountTimeout: 20000, // 20 секунд ожидания без изменений
   },
   
   pricingMapping: {

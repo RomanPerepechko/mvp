@@ -48,16 +48,27 @@ export class FutureToolsCrawler {
 
     logger.info(`Переход на страницу: ${futuretoolsConfig.toolsPageUrl}`);
     
-    await this.page.goto(futuretoolsConfig.toolsPageUrl, {
-      waitUntil: 'networkidle',
-      timeout: 30000,
-    });
+    try {
+      await this.page.goto(futuretoolsConfig.toolsPageUrl, {
+        waitUntil: 'networkidle',
+        timeout: 30000,
+      });
+      logger.info('Страница загружена успешно');
+    } catch (error) {
+      logger.error('Ошибка при загрузке страницы:', error);
+      throw error;
+    }
 
     // Ждем загрузки контента
     await this.page.waitForTimeout(3000);
 
     // Прокручиваем страницу и загружаем больше инструментов
-    await this.loadMoreTools();
+    try {
+      await this.loadMoreTools();
+      logger.info('Дополнительный контент загружен');
+    } catch (error) {
+      logger.warn('Ошибка при загрузке дополнительного контента:', error);
+    }
 
     // Парсим инструменты
     const tools = await this.parseToolsFromPage();
@@ -73,28 +84,82 @@ export class FutureToolsCrawler {
   private async loadMoreTools(): Promise<void> {
     if (!this.page) return;
 
-    const { maxLoadMoreAttempts, scrollDelay } = futuretoolsConfig.parsing;
+    const { maxLoadMoreAttempts, scrollDelay, maxScrollTime, stableCountTimeout, maxToolsCount } = futuretoolsConfig.parsing;
     let attempts = 0;
+    let lastCount = 0;
+    let stableStartTime = 0;
+    const startTime = Date.now();
 
-    logger.info('Загрузка дополнительных инструментов...');
+    logger.info('Загрузка дополнительных инструментов через скроллинг...');
 
     while (attempts < maxLoadMoreAttempts) {
-      // Прокручиваем вниз
+      // Проверяем максимальное время
+      if (Date.now() - startTime > maxScrollTime) {
+        logger.info(`Достигнуто максимальное время скроллинга: ${maxScrollTime}мс`);
+        break;
+      }
+
+      // Прокручиваем вниз более агрессивно
       await this.page.evaluate(() => {
+        // Прокручиваем до самого низа
         window.scrollTo(0, document.body.scrollHeight);
+        
+        // Дополнительно имитируем скроллинг пользователя
+        window.dispatchEvent(new Event('scroll'));
+        
+        // Прокручиваем немного назад и снова вниз для активации lazy loading
+        setTimeout(() => {
+          window.scrollTo(0, document.body.scrollHeight - 1000);
+          setTimeout(() => {
+            window.scrollTo(0, document.body.scrollHeight);
+          }, 100);
+        }, 200);
       });
 
       // Ждем загрузки
       await this.page.waitForTimeout(scrollDelay);
+      
+      // Дополнительная проверка - ждем появления новых элементов
+      try {
+        await this.page.waitForFunction(
+          (selector) => document.querySelectorAll(selector).length > 0,
+          futuretoolsConfig.selectors.toolCard,
+          { timeout: 2000 }
+        );
+      } catch {
+        // Игнорируем таймаут - элементы уже могут быть загружены
+      }
 
       // Проверяем количество загруженных инструментов
       const currentCount = await this.getToolsCount();
-      logger.debug(`Текущее количество инструментов: ${currentCount}`);
-
-      // Если достигли минимального количества, останавливаемся
-      if (currentCount >= futuretoolsConfig.parsing.minToolsCount) {
-        logger.info(`Достигнуто минимальное количество инструментов: ${currentCount}`);
-        break;
+      
+      // Если количество изменилось, сбрасываем таймер ожидания
+      if (currentCount > lastCount) {
+        const progress = Math.round((currentCount / 3553) * 100);
+        logger.info(`Загружено ещё ${currentCount - lastCount} инструментов. Всего: ${currentCount}/3553 (${progress}%)`);
+        lastCount = currentCount;
+        stableStartTime = Date.now();
+        
+        // Проверяем максимальное количество
+        if (currentCount >= maxToolsCount) {
+          logger.info(`Достигнуто максимальное количество инструментов: ${currentCount}`);
+          break;
+        }
+      } else {
+        // Количество не изменилось
+        if (stableStartTime === 0) {
+          stableStartTime = Date.now();
+          logger.debug(`Количество стабильно: ${currentCount}, начинаем отсчет...`);
+        }
+        
+        const waitTime = Date.now() - stableStartTime;
+        // Если количество не менялось слишком долго - останавливаемся
+        if (waitTime > stableCountTimeout) {
+          logger.info(`Остановка скроллинга: количество инструментов стабильно (${currentCount}) уже ${Math.round(waitTime/1000)}сек`);
+          break;
+        } else {
+          logger.debug(`Ожидание новых инструментов... (${Math.round(waitTime/1000)}/${Math.round(stableCountTimeout/1000)}сек)`);
+        }
       }
 
       // Ищем и нажимаем кнопку "Load More" если она есть
@@ -103,7 +168,7 @@ export class FutureToolsCrawler {
         if (loadMoreButton) {
           await loadMoreButton.click();
           logger.debug('Нажата кнопка "Load More"');
-          await this.page.waitForTimeout(2000);
+          await this.page.waitForTimeout(1000);
         }
       } catch (error) {
         logger.debug('Кнопка "Load More" не найдена или не кликабельна');
@@ -111,6 +176,10 @@ export class FutureToolsCrawler {
 
       attempts++;
     }
+
+    const finalCount = await this.getToolsCount();
+    const totalTime = Date.now() - startTime;
+    logger.info(`Скроллинг завершен. Итого инструментов: ${finalCount}, время: ${totalTime}мс, попыток: ${attempts}`);
   }
 
   /**
@@ -136,74 +205,81 @@ export class FutureToolsCrawler {
 
     logger.info('Начинаем парсинг инструментов...');
 
-    const tools = await this.page.evaluate((config: any) => {
-      const toolElements = document.querySelectorAll(config.selectors.toolCard);
-      const parsedTools: any[] = [];
+    try {
+      const tools = await this.page.evaluate((config: any) => {
+        const toolElements = document.querySelectorAll(config.selectors.toolCard);
+        const parsedTools: any[] = [];
+        
+        console.log(`Найдено ${toolElements.length} карточек инструментов`);
 
-      toolElements.forEach((toolElement, index) => {
-        try {
-          // Извлекаем данные инструмента
-          const nameElement = toolElement.querySelector(config.selectors.toolName);
-          const descriptionElement = toolElement.querySelector(config.selectors.toolDescription);
-          const urlElement = toolElement.querySelector(config.selectors.toolUrl);
-          const categoryElement = toolElement.querySelector(config.selectors.toolCategory);
+        toolElements.forEach((toolElement, index) => {
+          try {
+            // Извлекаем данные инструмента
+            const nameElement = toolElement.querySelector(config.selectors.toolName);
+            const descriptionElement = toolElement.querySelector(config.selectors.toolDescription);
+            const urlElement = toolElement.querySelector(config.selectors.toolUrl);
+            const categoryElement = toolElement.querySelector(config.selectors.toolCategory);
 
-          const name = nameElement?.textContent?.trim() || '';
-          const description = descriptionElement?.textContent?.trim() || '';
-          const urlHref = urlElement?.getAttribute('href') || '';
-          const category = categoryElement?.textContent?.trim() || 'Other';
+            const name = nameElement?.textContent?.trim() || '';
+            const description = descriptionElement?.textContent?.trim() || '';
+            const urlHref = urlElement?.getAttribute('href') || '';
+            const category = categoryElement?.textContent?.trim() || 'Other';
 
-          // Формируем полную ссылку
-          let url = urlHref;
-          if (url && !url.startsWith('http')) {
-            url = url.startsWith('/') ? `${config.baseUrl}${url}` : `${config.baseUrl}/${url}`;
-          }
-
-          // Извлекаем теги
-          const tagElements = toolElement.querySelectorAll(config.selectors.toolTags);
-          const tags: string[] = [];
-          tagElements.forEach((tagEl: any) => {
-            const tagText = tagEl.textContent?.trim();
-            if (tagText && !tags.includes(tagText)) {
-              tags.push(tagText);
+            // Формируем полную ссылку
+            let url = urlHref;
+            if (url && !url.startsWith('http')) {
+              url = url.startsWith('/') ? `${config.baseUrl}${url}` : `${config.baseUrl}/${url}`;
             }
-          });
 
-          // Определяем ценовую модель
-          const pricingElement = toolElement.querySelector(config.selectors.toolPricing);
-          const pricingText = pricingElement?.textContent?.trim().toLowerCase() || '';
-          
-          let pricing: string = 'Contact';
-          for (const [keyword, mappedPricing] of Object.entries(config.pricingMapping)) {
-            if (pricingText.includes(keyword.toLowerCase())) {
-              pricing = mappedPricing as string;
-              break;
-            }
-          }
-
-          // Добавляем инструмент если есть основные данные
-          if (name && description && url) {
-            parsedTools.push({
-              name,
-              description,
-              url,
-              tags,
-              category,
-              pricing,
-              source: 'futuretools.io',
+            // Извлекаем теги
+            const tagElements = toolElement.querySelectorAll(config.selectors.toolTags);
+            const tags: string[] = [];
+            tagElements.forEach((tagEl: any) => {
+              const tagText = tagEl.textContent?.trim();
+              if (tagText && !tags.includes(tagText)) {
+                tags.push(tagText);
+              }
             });
+
+            // Определяем ценовую модель
+            const pricingElement = toolElement.querySelector(config.selectors.toolPricing);
+            const pricingText = pricingElement?.textContent?.trim().toLowerCase() || '';
+            
+            let pricing: string = 'Contact';
+            for (const [keyword, mappedPricing] of Object.entries(config.pricingMapping)) {
+              if (pricingText.includes(keyword.toLowerCase())) {
+                pricing = mappedPricing as string;
+                break;
+              }
+            }
+
+            // Добавляем инструмент если есть основные данные
+            if (name && description && url) {
+              parsedTools.push({
+                name,
+                description,
+                url,
+                tags,
+                category,
+                pricing,
+                source: 'futuretools.io',
+              });
+            }
+          } catch (error) {
+            console.warn(`Ошибка парсинга инструмента ${index}:`, error);
           }
-        } catch (error) {
-          console.warn(`Ошибка парсинга инструмента ${index}:`, error);
-        }
-      });
+        });
 
-      return parsedTools;
-    }, futuretoolsConfig);
+        return parsedTools;
+      }, futuretoolsConfig);
 
-    logger.info(`Парсинг завершен. Найдено ${tools.length} инструментов`);
-    
-    return tools as ParsedTool[];
+      logger.info(`Парсинг завершен. Найдено ${tools.length} инструментов`);
+      
+      return tools as ParsedTool[];
+    } catch (error) {
+      logger.error('Ошибка при парсинге инструментов:', error);
+      return [];
+    }
   }
 
   /**
