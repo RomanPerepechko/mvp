@@ -208,10 +208,113 @@ const toolsRoutes: FastifyPluginAsync = async (fastify) => {
   fastify.post('/tools/resolve-url', async (request, reply) => {
     try {
       const { url } = request.body as { url: string };
-      const response = await fetch(url, { method: 'HEAD', redirect: 'follow' });
-      return { finalUrl: response.url };
+      
+      if (!url) {
+        reply.code(400).send({ error: 'URL is required' });
+        return;
+      }
+
+      // Используем AbortController для таймаута
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 секунд
+
+      try {
+        // Используем GET вместо HEAD для лучшей совместимости с редиректами
+        const response = await fetch(url, {
+          method: 'GET',
+          redirect: 'follow',
+          signal: controller.signal,
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'DNT': '1',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+          },
+        });
+
+        clearTimeout(timeoutId);
+        
+        let finalUrl = response.url;
+        let httpRedirected = response.redirected;
+        let jsRedirect = false;
+        let metaRedirect = false;
+
+        // Если это HTML контент, парсим его для поиска JS или мета редиректов
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType.includes('text/html') && response.status === 200) {
+          try {
+            const html = await response.text();
+            
+            // Поиск мета редиректа
+            const metaMatch = html.match(/<meta\s+http-equiv=["']refresh["']\s+content=["']\d*;?\s*url=([^"']+)["']/i);
+            if (metaMatch && metaMatch[1]) {
+              let metaUrl = metaMatch[1].trim();
+              if (metaUrl.startsWith('/')) {
+                const baseUrl = new URL(response.url);
+                metaUrl = `${baseUrl.origin}${metaUrl}`;
+              } else if (!metaUrl.startsWith('http')) {
+                const baseUrl = new URL(response.url);
+                metaUrl = `${baseUrl.origin}/${metaUrl}`;
+              }
+              finalUrl = metaUrl;
+              metaRedirect = true;
+            }
+
+            // Поиск простых JS редиректов
+            if (!metaRedirect) {
+              const jsMatches = [
+                /window\.location\.href\s*=\s*["']([^"']+)["']/i,
+                /window\.location\s*=\s*["']([^"']+)["']/i,
+                /location\.href\s*=\s*["']([^"']+)["']/i,
+                /location\.replace\s*\(\s*["']([^"']+)["']\s*\)/i
+              ];
+
+              for (const pattern of jsMatches) {
+                const jsMatch = html.match(pattern);
+                if (jsMatch && jsMatch[1]) {
+                  let jsUrl = jsMatch[1].trim();
+                  if (jsUrl.startsWith('/')) {
+                    const baseUrl = new URL(response.url);
+                    jsUrl = `${baseUrl.origin}${jsUrl}`;
+                  } else if (!jsUrl.startsWith('http')) {
+                    const baseUrl = new URL(response.url);
+                    jsUrl = `${baseUrl.origin}/${jsUrl}`;
+                  }
+                  finalUrl = jsUrl;
+                  jsRedirect = true;
+                  break;
+                }
+              }
+            }
+          } catch (parseError) {
+            // Игнорируем ошибки парсинга, возвращаем оригинальный результат
+          }
+        }
+        
+        return { 
+          originalUrl: url,
+          finalUrl: finalUrl,
+          status: response.status,
+          redirected: httpRedirected || metaRedirect || jsRedirect,
+          redirectType: httpRedirected ? 'http' : metaRedirect ? 'meta' : jsRedirect ? 'javascript' : 'none'
+        };
+      } catch (fetchError) {
+        clearTimeout(timeoutId);
+        
+        if (fetchError instanceof Error && fetchError.name === 'AbortError') {
+          reply.code(408).send({ error: 'Request timeout' });
+        } else {
+          throw fetchError;
+        }
+      }
     } catch (error) {
-      reply.code(500).send({ error: 'Failed to resolve URL' });
+      reply.code(500).send({ 
+        error: 'Failed to resolve URL',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
     }
   });
 };
