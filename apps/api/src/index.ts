@@ -56,9 +56,10 @@ async function start() {
     });
 
   } catch (error) {
-    logger.error('❌ Ошибка запуска сервера:', error);
+    console.error('❌ Ошибка запуска сервера:', error);
     if (error instanceof Error) {
-      logger.error('Stack trace:', error.stack);
+      console.error('Stack trace:', error.stack);
+      console.error('Error message:', error.message);
     }
     process.exit(1);
   }

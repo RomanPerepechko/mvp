@@ -1,50 +1,35 @@
-import type { PricingType } from '../types/index.js';
+import type { CrawlerConfig } from '../types/index.js';
 
-export interface FutureToolsConfig {
-  /** Базовый URL сайта */
-  baseUrl: string;
-  /** URL страницы со списком инструментов */
+export interface FutureToolsConfig extends CrawlerConfig {
   toolsPageUrl: string;
-  /** CSS селекторы для элементов на странице */
   selectors: {
-    /** Контейнер с карточками инструментов */
     toolsContainer: string;
-    /** Отдельная карточка инструмента */
     toolCard: string;
-    /** Название инструмента */
     toolName: string;
-    /** Описание инструмента */
     toolDescription: string;
-    /** Ссылка на инструмент */
     toolUrl: string;
-    /** Категория инструмента */
     toolCategory: string;
-    /** Теги инструмента */
     toolTags: string;
-    /** Информация о цене */
     toolPricing: string;
-    /** Кнопка загрузки большего количества инструментов */
+    toolFavoriteCount: string;
     loadMoreButton: string;
   };
-  /** Настройки парсинга */
   parsing: {
-    /** Минимальное количество инструментов для парсинга */
     minToolsCount: number;
-    /** Максимальное количество инструментов для парсинга */
     maxToolsCount: number;
-    /** Задержка между прокручиваниями страницы (мс) */
     scrollDelay: number;
-    /** Максимальное количество попыток загрузки больше инструментов */
     maxLoadMoreAttempts: number;
-    /** Максимальное время скроллинга (мс) */
     maxScrollTime: number;
-    /** Время ожидания без изменений количества инструментов (мс) */
     stableCountTimeout: number;
   };
-  /** Маппинг ценовых моделей */
-  pricingMapping: Record<string, PricingType>;
+  pricingMapping: Record<string, string>;
+  browser: {
+    headless: boolean;
+    timeout: number;
+  };
 }
 
+// Конфигурация для парсера FutureTools
 export const futuretoolsConfig: FutureToolsConfig = {
   baseUrl: 'https://www.futuretools.io',
   toolsPageUrl: 'https://www.futuretools.io',
@@ -58,6 +43,7 @@ export const futuretoolsConfig: FutureToolsConfig = {
     toolCategory: '.text-block-53',
     toolTags: '.text-block-53',
     toolPricing: '.pricing, .price, .badge',
+    toolFavoriteCount: '.text-block-52.jetboost-item-total-favorites-vd2l',
     loadMoreButton: 'button[data-testid="load-more"], .load-more, button:contains("Load More")',
   },
   
@@ -81,5 +67,10 @@ export const futuretoolsConfig: FutureToolsConfig = {
     '$': 'Paid',
     '$$': 'Paid',
     '$$$': 'Paid',
+  },
+  
+  browser: {
+    headless: true,
+    timeout: 30000,
   },
 }; 

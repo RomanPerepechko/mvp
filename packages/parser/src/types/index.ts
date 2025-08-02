@@ -4,6 +4,20 @@
 export type PricingType = 'Free' | 'Paid' | 'Freemium' | 'Contact';
 
 /**
+ * Интерфейс категории AI-инструмента
+ */
+export interface Category {
+  /** Уникальный идентификатор категории */
+  id: string;
+  /** Название категории */
+  name: string;
+  /** Дата создания записи */
+  createdAt: string;
+  /** Дата последнего обновления */
+  updatedAt: string;
+}
+
+/**
  * Основной интерфейс AI-инструмента
  */
 export interface Tool {
@@ -17,10 +31,14 @@ export interface Tool {
   url: string;
   /** Теги (массив строк) */
   tags: string[];
-  /** Категория инструмента */
-  category: string;
+  /** ID категории инструмента */
+  categoryId: string;
+  /** Категория инструмента (при включении связи) */
+  category?: Category;
   /** Ценовая модель */
   pricing: PricingType;
+  /** Количество добавлений в избранное */
+  favoriteCount: number;
   /** Дата создания записи */
   createdAt: string;
   /** Дата последнего обновления */
@@ -28,38 +46,32 @@ export interface Tool {
 }
 
 /**
- * Данные для создания/обновления инструмента (без дат)
+ * Интерфейс для данных парсера (до сохранения в БД)
  */
-export interface ToolCreateInput {
+export interface ParsedTool {
   name: string;
   description: string;
   url: string;
   tags: string[];
-  category: string;
+  category: string; // В парсере все еще используется строка
   pricing: PricingType;
-}
-
-/**
- * Результат парсинга одного инструмента
- */
-export interface ParsedTool extends ToolCreateInput {
-  /** Источник откуда был спарсен инструмент */
+  favoriteCount: number;
   source: string;
 }
 
 /**
- * Результат операции парсинга
+ * Результат парсинга инструментов
  */
 export interface CrawlResult {
-  /** Количество успешно спарсенных инструментов */
+  /** Количество обработанных инструментов */
   parsed: number;
-  /** Количество сохраненных в БД инструментов */
+  /** Количество новых инструментов */
   saved: number;
   /** Количество обновленных инструментов */
   updated: number;
-  /** Ошибки во время парсинга */
+  /** Список ошибок */
   errors: string[];
-  /** Время выполнения операции в миллисекундах */
+  /** Время выполнения в миллисекундах */
   duration: number;
 }
 
@@ -75,4 +87,30 @@ export interface CrawlOptions {
   dryRun?: boolean;
   /** Уровень логирования */
   logLevel?: string;
+}
+
+/**
+ * Конфигурация парсера
+ */
+export interface CrawlerConfig {
+  /** Базовый URL сайта */
+  baseUrl: string;
+  /** Селекторы для парсинга */
+  selectors: {
+    [key: string]: string;
+  };
+  /** Настройки браузера */
+  browser?: {
+    headless?: boolean;
+    timeout?: number;
+  };
+}
+
+/**
+ * Статистика по инструментам
+ */
+export interface ToolStats {
+  total: number;
+  byCategory: Record<string, number>;
+  byPricing: Record<string, number>;
 } 

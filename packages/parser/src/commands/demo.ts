@@ -13,6 +13,7 @@ const demoTools: ParsedTool[] = [
     tags: ['chatbot', 'text-generation', 'ai-assistant'],
     category: 'Writing',
     pricing: 'Freemium',
+    favoriteCount: 15420,
     source: 'demo',
   },
   {
@@ -22,6 +23,7 @@ const demoTools: ParsedTool[] = [
     tags: ['image-generation', 'art', 'creative'],
     category: 'Image',
     pricing: 'Paid',
+    favoriteCount: 8750,
     source: 'demo',
   },
   {
@@ -31,6 +33,7 @@ const demoTools: ParsedTool[] = [
     tags: ['productivity', 'notes', 'planning'],
     category: 'Productivity',
     pricing: 'Freemium',
+    favoriteCount: 6340,
     source: 'demo',
   },
   {
@@ -40,6 +43,7 @@ const demoTools: ParsedTool[] = [
     tags: ['copywriting', 'marketing', 'content'],
     category: 'Writing',
     pricing: 'Freemium',
+    favoriteCount: 4290,
     source: 'demo',
   },
   {
@@ -49,6 +53,7 @@ const demoTools: ParsedTool[] = [
     tags: ['video-generation', 'avatar', 'presentation'],
     category: 'Video',
     pricing: 'Paid',
+    favoriteCount: 3180,
     source: 'demo',
   },
 ];

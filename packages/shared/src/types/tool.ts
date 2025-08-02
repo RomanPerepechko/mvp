@@ -4,6 +4,20 @@
 export type PricingType = 'Free' | 'Paid' | 'Freemium' | 'Contact';
 
 /**
+ * Интерфейс категории AI-инструмента
+ */
+export interface Category {
+  /** Уникальный идентификатор категории */
+  id: string;
+  /** Название категории */
+  name: string;
+  /** Дата создания записи */
+  createdAt: string;
+  /** Дата последнего обновления */
+  updatedAt: string;
+}
+
+/**
  * Основной интерфейс AI-инструмента
  */
 export interface Tool {
@@ -17,10 +31,14 @@ export interface Tool {
   url: string;
   /** Теги (массив строк) */
   tags: string[];
-  /** Категория инструмента */
-  category: string;
+  /** ID категории инструмента */
+  categoryId: string;
+  /** Категория инструмента (при включении связи) */
+  category?: Category;
   /** Ценовая модель */
   pricing: PricingType;
+  /** Количество добавлений в избранное */
+  favoriteCount: number;
   /** Дата создания записи */
   createdAt: string;
   /** Дата последнего обновления */

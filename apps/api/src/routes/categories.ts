@@ -1,35 +1,33 @@
 import { FastifyPluginAsync } from 'fastify';
 import { prisma } from '../db/client.js';
-import { CategoriesSchema, ErrorSchema } from '../schemas/tool.js';
+import { CategoriesWithCountListSchema, ErrorSchema } from '../schemas/tool.js';
 
 const categoriesRoutes: FastifyPluginAsync = async (fastify) => {
-  // GET /api/categories - Получить список уникальных категорий
-  fastify.get('/categories', {
-    schema: {
-      description: 'Получить список всех категорий AI-инструментов',
-      tags: ['categories'],
-      response: {
-        200: CategoriesSchema,
-        500: ErrorSchema,
-      },
-    },
-  }, async (request, reply) => {
+  // GET /api/categories - Получить список категорий с количеством инструментов
+  fastify.get('/categories', async (request, reply) => {
     try {
-      // Получаем уникальные категории из базы данных
-      const categories = await prisma.tool.findMany({
-        select: {
-          category: true,
+      // Получаем все категории из базы данных с подсчетом инструментов
+      const categories = await prisma.category.findMany({
+        include: {
+          _count: {
+            select: {
+              tools: true
+            }
+          }
         },
-        distinct: ['category'],
         orderBy: {
-          category: 'asc',
+          name: 'asc',
         },
       });
 
-      // Извлекаем только названия категорий
-      const categoryNames = categories.map(item => item.category);
-
-      return categoryNames;
+      // Форматируем ответ с количеством инструментов
+      return categories.map(category => ({
+        id: category.id,
+        name: category.name,
+        toolsCount: category._count.tools,
+        createdAt: category.createdAt.toISOString(),
+        updatedAt: category.updatedAt.toISOString(),
+      }));
     } catch (error) {
       fastify.log.error(error);
       reply.code(500).send({
@@ -41,36 +39,27 @@ const categoriesRoutes: FastifyPluginAsync = async (fastify) => {
   });
 
   // GET /api/categories/stats - Получить статистику по категориям
-  fastify.get('/categories/stats', {
-    schema: {
-      description: 'Получить статистику инструментов по категориям',
-      tags: ['categories'],
-      response: {
-        200: {
-          type: 'object',
-          additionalProperties: {
-            type: 'number',
-          },
-        },
-        500: ErrorSchema,
-      },
-    },
-  }, async (request, reply) => {
+  fastify.get('/categories/stats', async (request, reply) => {
     try {
       // Группировка и подсчет по категориям
       const stats = await prisma.tool.groupBy({
-        by: ['category'],
+        by: ['categoryId'],
         _count: {
-          category: true,
-        },
-        orderBy: {
-          category: 'asc',
+          categoryId: true,
         },
       });
 
+      // Получаем названия категорий
+      const categories = await prisma.category.findMany();
+      const categoryMap = categories.reduce((acc, cat) => {
+        acc[cat.id] = cat.name;
+        return acc;
+      }, {} as Record<string, string>);
+
       // Преобразуем в объект {категория: количество}
       const categoryStats = stats.reduce((acc: any, item: any) => {
-        acc[item.category] = item._count.category;
+        const categoryName = categoryMap[item.categoryId] || 'Unknown';
+        acc[categoryName] = item._count.categoryId;
         return acc;
       }, {});
 
