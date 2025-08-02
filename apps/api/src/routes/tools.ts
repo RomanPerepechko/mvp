@@ -98,8 +98,25 @@ const toolsRoutes: FastifyPluginAsync = async (fastify) => {
         ];
       }
       
-      if (query.categoryId) {
-        where.categoryId = query.categoryId;
+      // Обработка категорий (поддержка categoryId и category)
+      const categoryFilter = query.categoryId || query.category;
+      if (categoryFilter) {
+        if (typeof categoryFilter === 'string') {
+          // Одна категория или несколько через запятую
+          const categories = categoryFilter.split(',').map(c => c.trim()).filter(c => c);
+          if (categories.length === 1) {
+            where.categoryId = categories[0];
+          } else if (categories.length > 1) {
+            where.categoryId = { in: categories };
+          }
+        } else if (Array.isArray(categoryFilter)) {
+          // Массив категорий
+          if (categoryFilter.length === 1) {
+            where.categoryId = categoryFilter[0];
+          } else if (categoryFilter.length > 1) {
+            where.categoryId = { in: categoryFilter };
+          }
+        }
       }
       
       if (query.pricing) {

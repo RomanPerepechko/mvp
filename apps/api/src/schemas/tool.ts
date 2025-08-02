@@ -51,6 +51,7 @@ export const ToolsQuerySchema = z.object({
   search: z.string().optional(),
   tags: z.union([z.string(), z.array(z.string())]).optional(),
   categoryId: z.string().uuid().optional(),
+  category: z.union([z.string(), z.array(z.string())]).optional(), // Поддержка одной или нескольких категорий через запятую
   pricing: PricingTypeSchema.optional(),
   sortBy: z.enum(['name', 'createdAt', 'favoriteCount']).optional(),
   sortOrder: z.enum(['asc', 'desc']).optional(),
